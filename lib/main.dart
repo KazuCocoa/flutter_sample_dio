@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:dio/dio.dart';
 
 void main() {
   runApp(const MyApp());
@@ -57,8 +58,11 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
-  void _incrementCounter() {
+  final dio = Dio();
+
+  void _incrementCounter() async {
     setState(() {
+      getHttp();
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
       // so that the display can reflect the updated values. If we changed
@@ -66,6 +70,11 @@ class _MyHomePageState extends State<MyHomePage> {
       // called again, and so nothing would appear to happen.
       _counter++;
     });
+  }
+
+  void getHttp() async {
+    final response = await dio.get('https://www.yahoo.com/');
+    print(response);
   }
 
   @override
