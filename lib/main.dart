@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:dio/io.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
-import 'package:http/io_client.dart';
 
 void main() {
   runApp(const MyApp());
