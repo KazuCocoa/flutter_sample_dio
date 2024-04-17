@@ -1,5 +1,9 @@
+import 'dart:io';
+
+import 'package:dio/io.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'package:http/io_client.dart';
 
 void main() {
   runApp(const MyApp());
@@ -73,7 +77,14 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void getHttp() async {
-    final response = await dio.get('https://www.yahoo.com/');
+    dio.httpClientAdapter = IOHttpClientAdapter(
+      createHttpClient: () {
+        final HttpClient client = HttpClient(context: SecurityContext(withTrustedRoots: false));
+        client.badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+        return client;
+      },
+    );
+    final response = await dio.get('https://www.google.com/');
     print(response);
   }
 
